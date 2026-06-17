@@ -24,6 +24,24 @@
 .DS_Store
 *.pem
 
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# OS temp files
+*.tmp
+*.temp
+
+# IDE / editor
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Claude Code user-local settings
+.claude/settings.local.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*
