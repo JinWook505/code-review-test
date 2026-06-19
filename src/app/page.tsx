@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { members, albums, news, schedule } from "@/lib/data";
-import { ChevronRight, Calendar, Music, Users, ExternalLink } from "lucide-react";
+import { ChevronRight, Calendar, Music, Users, ExternalLink, Sparkles } from "lucide-react";
 
 export default function Home() {
   const latestAlbum = albums[albums.length - 1];
@@ -273,6 +273,59 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── section divider ── */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="border-t border-purple-900/25" />
+      </div>
+
+      {/* ── Fan Zone CTA ── */}
+      <section className="py-20 md:py-28 px-5 sm:px-8 lg:px-12 max-w-7xl mx-auto">
+        <div className="flex items-center justify-between mb-10 sm:mb-12">
+          <div>
+            <p className="text-purple-400 text-xs sm:text-sm font-medium uppercase tracking-widest mb-2">Fan Zone</p>
+            <h2 className="text-2xl sm:text-3xl xl:text-4xl font-bold text-white">팬 참여 공간</h2>
+          </div>
+          <Link href="/fan" className="flex items-center gap-1 text-sm text-purple-400 hover:text-purple-300 transition-colors whitespace-nowrap">
+            <Sparkles size={14} />
+            전체보기 <ChevronRight size={16} />
+          </Link>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+          <Link
+            href="/quiz"
+            className="group glass-card rounded-2xl p-6 sm:p-7 hover:border-purple-500/40 transition-all hover:-translate-y-0.5 duration-300"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-2xl">🧠</span>
+              <div>
+                <p className="text-xs text-purple-400 font-medium uppercase tracking-widest">Quiz</p>
+                <h3 className="font-black text-white text-lg">르센느 퀴즈</h3>
+              </div>
+            </div>
+            <p className="text-gray-400 text-sm mb-4">10문제로 나의 르마인 레벨을 확인해봐요!</p>
+            <div className="flex items-center gap-1 text-purple-400 text-sm font-medium group-hover:gap-2 transition-all">
+              퀴즈 풀기 <ChevronRight size={15} />
+            </div>
+          </Link>
+          <Link
+            href="/member-test"
+            className="group glass-card rounded-2xl p-6 sm:p-7 hover:border-pink-500/40 transition-all hover:-translate-y-0.5 duration-300"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-2xl">💜</span>
+              <div>
+                <p className="text-xs text-pink-400 font-medium uppercase tracking-widest">Member Test</p>
+                <h3 className="font-black text-white text-lg">나와 닮은 멤버는?</h3>
+              </div>
+            </div>
+            <p className="text-gray-400 text-sm mb-4">5가지 질문으로 내 르센느 멤버를 찾아봐요!</p>
+            <div className="flex items-center gap-1 text-pink-400 text-sm font-medium group-hover:gap-2 transition-all">
+              테스트 시작 <ChevronRight size={15} />
+            </div>
+          </Link>
         </div>
       </section>
 

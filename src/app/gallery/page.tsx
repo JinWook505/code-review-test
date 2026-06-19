@@ -16,6 +16,9 @@ const galleryItems = [
   { id: 10, memberId: "may", tag: "화보", era: "lip bomb", large: false },
   { id: 11, memberId: "woni", tag: "비하인드", era: "Glow Up", large: false },
   { id: 12, memberId: "liv", tag: "공방", era: "lip bomb", large: false },
+  { id: 13, memberId: "zena", tag: "공방", era: "SCENEDROME", large: false },
+  { id: 14, memberId: "may", tag: "직캠", era: "Re:Scene", large: false },
+  { id: 15, memberId: "minami", tag: "화보", era: "lip bomb", large: false },
 ];
 
 const tagColors: Record<string, string> = {
@@ -116,20 +119,17 @@ export default function GalleryPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     <span className={`${isLarge ? "text-5xl sm:text-6xl" : "text-3xl sm:text-4xl"}`}>{member?.emoji}</span>
 
-                    {/* Hover overlay */}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-end p-4">
                       <p className="text-white font-bold text-sm">{member?.nameKr}</p>
                       <p className="text-white/60 text-xs mt-0.5">{item.era}</p>
                     </div>
 
-                    {/* Tag badge */}
                     <div className="absolute top-2.5 left-2.5">
                       <span className={`text-xs px-2 py-0.5 rounded-full text-white font-medium ${tagColors[item.tag]}`}>
                         {item.tag}
                       </span>
                     </div>
 
-                    {/* Member name badge */}
                     <div className="absolute top-2.5 right-2.5">
                       <span
                         className="text-xs px-2 py-0.5 rounded-full text-white font-medium"
