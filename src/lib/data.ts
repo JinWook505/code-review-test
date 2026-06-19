@@ -46,7 +46,7 @@ export type ScheduleItem = {
 // 데뷔일: 2024.03.26
 // 팬덤명: REMINE (리마인) — 2024.07.10 공식 발표
 // 그룹명 의미: 향기(Scent)로 다시(RE) 장면(SCENE)을 떠올린다 (프루스트 효과)
-// 공식 사이트: rescene.bstage.in
+// 공식 사이트: bstage URL 404 확인됨 — 공식 인스타/유튜브로 대체
 // 공식 포지션은 미공개 — 아래 포지션은 팬 커뮤니티 기반
 
 export const members: Member[] = [
@@ -189,6 +189,16 @@ export const albums: Album[] = [
     tracks: [
       { title: "Deja Vu", isTitle: true },
       { title: "Mood" },
+    ],
+  },
+  {
+    id: "busy-boy",
+    title: "Busy Boy",
+    releaseDate: "2026.02.27",
+    type: "디지털싱글",
+    color: "from-blue-600 to-indigo-500",
+    tracks: [
+      { title: "Busy Boy", isTitle: true },
     ],
   },
   {

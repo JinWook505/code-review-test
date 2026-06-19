@@ -91,119 +91,127 @@ const categoryColors: Record<string, string> = {
 
 export default function CommunityPage() {
   return (
-    <div className="min-h-screen pt-24 pb-20">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <p className="text-purple-400 text-sm font-medium uppercase tracking-widest mb-3">Community</p>
-          <h1 className="text-5xl font-black text-white mb-4">커뮤니티</h1>
-          <p className="text-gray-400 max-w-md mx-auto">
+    <div className="min-h-screen pt-24 pb-32 xl:pb-40">
+      <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12">
+
+        <div className="text-center mb-20 md:mb-28 xl:mb-32">
+          <p className="text-purple-400 text-xs sm:text-sm font-medium uppercase tracking-widest mb-3">Community</p>
+          <h1 className="text-4xl sm:text-5xl xl:text-6xl font-black text-white mb-5">커뮤니티</h1>
+          <p className="text-gray-400 text-sm sm:text-base max-w-md mx-auto leading-loose">
             르센느(RESCENE) 팬덤 <span className="text-purple-300 font-semibold">REMINE</span>이 모이는 공간입니다
           </p>
         </div>
 
         {/* Official News */}
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xl font-bold text-white">공식 소식</h2>
+        <div className="mb-20 md:mb-28 xl:mb-32">
+          <div className="flex items-center justify-between mb-8 sm:mb-10">
+            <h2 className="text-lg sm:text-xl xl:text-2xl font-bold text-white">공식 소식</h2>
             <span className="text-xs text-gray-600">출처 명시 기반</span>
           </div>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-5 sm:gap-7 xl:gap-8">
             {news.map((item) => (
-              <article key={item.id} className="glass-card rounded-2xl p-5 hover:border-purple-500/40 transition-all cursor-pointer">
-                <div className="flex items-center justify-between mb-3">
+              <article key={item.id} className="glass-card rounded-2xl p-7 sm:p-8 xl:p-9 hover:border-purple-500/40 transition-colors cursor-pointer flex flex-col">
+                <div className="flex items-center justify-between mb-4 sm:mb-5">
                   <span className={`text-xs font-semibold px-3 py-1 rounded-full ${item.tagColor} text-white`}>
                     {item.tag}
                   </span>
                   <span className="text-xs text-gray-600">{item.date}</span>
                 </div>
-                <h3 className="font-bold text-white mb-1.5 text-sm leading-tight">{item.title}</h3>
-                <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{item.description}</p>
+                <h3 className="font-bold text-white mb-3 text-sm sm:text-base leading-snug">{item.title}</h3>
+                <p className="text-xs sm:text-sm text-gray-500 leading-relaxed line-clamp-2 flex-1">{item.description}</p>
                 {item.source && (
-                  <p className="text-xs text-gray-700 mt-2">출처: {item.source}</p>
+                  <p className="text-xs text-gray-700 mt-5 pt-4 border-t border-gray-800/60">출처: {item.source}</p>
                 )}
               </article>
             ))}
           </div>
         </div>
 
-        {/* Official channels quick access */}
-        <div className="mb-12 glass-card rounded-2xl p-5">
-          <p className="text-sm font-semibold text-white mb-3">공식 팬 채널</p>
-          <div className="flex flex-wrap gap-3">
+        <div className="border-t border-purple-900/25 mb-20 md:mb-28 xl:mb-32" />
+
+        {/* Official channels */}
+        <div className="mb-20 md:mb-28 xl:mb-32 glass-card rounded-2xl p-7 sm:p-9">
+          <p className="text-sm sm:text-base xl:text-lg font-semibold text-white mb-5 sm:mb-6">공식 팬 채널</p>
+          <div className="flex flex-wrap gap-3 sm:gap-4">
             {[
-              { label: "Bstage (공식 팬클럽)", href: "https://rescene.bstage.in", icon: "🌐" },
               { label: "YouTube 공식", href: "https://www.youtube.com/@RESCENE_official", icon: "▶️" },
               { label: "Instagram", href: "https://www.instagram.com/rescene_official/", icon: "📸" },
               { label: "X/트위터", href: "https://x.com/RESCENEofficial", icon: "🐦" },
               { label: "TikTok", href: "https://www.tiktok.com/@rescene_official", icon: "🎵" },
+              { label: "Spotify", href: "https://open.spotify.com/artist/5deOsjuFTKrNMJW3rKuL8S", icon: "🎧" },
             ].map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 hover:text-white hover:border-purple-500/40 transition-all"
+                className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm text-gray-300 hover:text-white hover:border-purple-500/40 transition-all"
               >
                 <span>{link.icon}</span>
                 <span>{link.label}</span>
-                <ExternalLink size={10} />
+                <ExternalLink size={10} className="flex-shrink-0" />
               </a>
             ))}
           </div>
         </div>
 
+        <div className="border-t border-purple-900/25 mb-20 md:mb-28 xl:mb-32" />
+
         {/* Fan Board */}
         <div>
-          <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xl font-bold text-white">팬 게시판</h2>
-            <button className="flex items-center gap-2 px-4 py-2 bg-purple-600/30 border border-purple-500/40 rounded-lg text-sm text-purple-300 hover:bg-purple-600/50 transition-colors">
+          <div className="flex items-center justify-between mb-8 sm:mb-10">
+            <h2 className="text-lg sm:text-xl xl:text-2xl font-bold text-white">팬 게시판</h2>
+            <button
+              className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 bg-purple-600/30 border border-purple-500/40 rounded-lg text-xs sm:text-sm text-purple-300 hover:bg-purple-600/50 transition-colors"
+              aria-label="글쓰기 (데모)"
+            >
               <MessageCircle size={14} />
               글쓰기
             </button>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-5 sm:space-y-6">
             {posts.map((post) => (
               <div
                 key={post.id}
-                className={`glass-card rounded-2xl p-5 hover:border-purple-500/40 transition-all cursor-pointer ${
+                className={`glass-card rounded-2xl p-6 sm:p-8 xl:p-9 hover:border-purple-500/40 transition-colors cursor-pointer ${
                   post.pinned ? "border-purple-500/30 bg-purple-900/10" : ""
                 }`}
               >
                 <div className="flex items-start gap-3">
                   {post.pinned && (
-                    <Pin size={14} className="text-purple-400 flex-shrink-0 mt-0.5" />
+                    <Pin size={14} className="text-purple-400 flex-shrink-0 mt-1" />
                   )}
                   <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <span className={`text-xs px-2 py-0.5 rounded-full ${categoryColors[post.category] ?? "bg-gray-500/20 text-gray-400"}`}>
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      <span className={`text-xs px-2.5 py-0.5 rounded-full ${categoryColors[post.category] ?? "bg-gray-500/20 text-gray-400"}`}>
                         {post.category}
                       </span>
                       {post.pinned && (
                         <span className="text-xs text-purple-400 font-medium">공지</span>
                       )}
                     </div>
-                    <h3 className="font-semibold text-white text-sm mb-1 leading-tight">{post.title}</h3>
-                    <p className="text-xs text-gray-500 line-clamp-1">{post.content}</p>
+                    <h3 className="font-semibold text-white text-sm sm:text-base mb-2 leading-snug">{post.title}</h3>
+                    <p className="text-xs sm:text-sm text-gray-500 line-clamp-1 leading-relaxed">{post.content}</p>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-800">
-                  <div className="flex items-center gap-1 text-xs text-gray-600">
+                <div className="flex items-center justify-between mt-5 pt-4 sm:pt-5 border-t border-gray-800/60">
+                  <div className="flex items-center gap-2 text-xs text-gray-600">
                     <span className="text-gray-500 font-medium">{post.author}</span>
                     <span>·</span>
                     <span>{post.date}</span>
                   </div>
-                  <div className="flex items-center gap-4 text-xs text-gray-600">
-                    <span className="flex items-center gap-1">
+                  <div className="flex items-center gap-4 sm:gap-5 text-xs text-gray-600">
+                    <span className="flex items-center gap-1.5">
                       <Eye size={12} />
                       {post.views.toLocaleString()}
                     </span>
-                    <span className="flex items-center gap-1">
+                    <span className="flex items-center gap-1.5">
                       <Heart size={12} />
                       {post.likes.toLocaleString()}
                     </span>
-                    <span className="flex items-center gap-1">
+                    <span className="flex items-center gap-1.5">
                       <MessageCircle size={12} />
                       {post.comments}
                     </span>
@@ -213,11 +221,11 @@ export default function CommunityPage() {
             ))}
           </div>
 
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center gap-2 mt-12 sm:mt-14">
             {[1, 2, 3, 4, 5].map((p) => (
               <button
                 key={p}
-                className={`w-9 h-9 rounded-lg text-sm transition-colors ${
+                className={`w-10 h-10 rounded-lg text-sm transition-colors ${
                   p === 1
                     ? "bg-purple-600 text-white font-bold"
                     : "glass-card text-gray-400 hover:text-white"
