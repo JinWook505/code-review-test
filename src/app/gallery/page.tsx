@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { members } from "@/lib/data";
+import { Play } from "lucide-react";
+import { members, albums, getYouTubeVideoId, getYouTubeThumbnail } from "@/lib/data";
+import FallbackImage from "@/components/FallbackImage";
 
 const galleryItems = [
   { id: 1, memberId: "woni", tag: "공방", era: "SCENEDROME", large: true },
@@ -35,6 +37,22 @@ const eraColors: Record<string, string> = {
   "Dearest": "from-amber-500 to-orange-400",
   "lip bomb": "from-rose-600 to-pink-500",
 };
+
+const mvVideos = albums
+  .filter((a) => a.mvLink)
+  .map((album) => {
+    const videoId = getYouTubeVideoId(album.mvLink!)!;
+    return {
+      id: album.id,
+      title: album.title,
+      releaseDate: album.releaseDate,
+      type: album.type,
+      thumbnailUrl: getYouTubeThumbnail(videoId),
+      sourceUrl: album.mvLink!,
+      color: album.color,
+    };
+  })
+  .reverse();
 
 export default function GalleryPage() {
   const [activeMember, setActiveMember] = useState("all");
@@ -144,6 +162,54 @@ export default function GalleryPage() {
             })}
           </div>
         )}
+
+        {/* MV & 영상 */}
+        <div className="mt-20 sm:mt-24">
+          <div className="flex items-center gap-3 mb-7 sm:mb-9">
+            <Play size={18} className="text-purple-400 flex-shrink-0" />
+            <h2 className="text-lg sm:text-xl font-bold text-white">MV & 영상</h2>
+            <span className="text-xs text-gray-600 ml-1">공식 YouTube</span>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+            {mvVideos.map((video) => (
+              <a
+                key={video.id}
+                href={video.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group glass-card rounded-2xl overflow-hidden hover:border-purple-500/40 transition-all flex flex-col"
+              >
+                {/* Thumbnail */}
+                <div className={`relative h-44 sm:h-48 bg-gradient-to-br ${video.color} flex-shrink-0 overflow-hidden`}>
+                  <FallbackImage
+                    src={video.thumbnailUrl}
+                    alt={`${video.title} MV 썸네일`}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
+                  {/* Play button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                      <Play size={20} className="text-white ml-0.5" />
+                    </div>
+                  </div>
+                  {/* Type badge */}
+                  <div className="absolute top-2.5 left-2.5">
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-black/50 text-white/80 font-medium backdrop-blur-sm">
+                      {video.type}
+                    </span>
+                  </div>
+                </div>
+                {/* Info */}
+                <div className="p-4 sm:p-5">
+                  <p className="text-white font-bold text-sm sm:text-base leading-snug">{video.title}</p>
+                  <p className="text-gray-500 text-xs mt-1">{video.releaseDate}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
 
         {/* Notice */}
         <div className="mt-14 sm:mt-16 glass-card rounded-2xl p-7 sm:p-9 text-center">

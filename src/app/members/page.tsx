@@ -1,4 +1,5 @@
 import { members } from "@/lib/data";
+import FallbackImage from "@/components/FallbackImage";
 
 export const metadata = {
   title: "멤버 | RESCENE 팬페이지",
@@ -34,12 +35,32 @@ export default function MembersPage() {
             >
               {/* Avatar */}
               <div className="flex-shrink-0">
-                <div
-                  className={`w-48 h-48 sm:w-60 sm:h-60 md:w-64 md:h-64 xl:w-72 xl:h-72 rounded-3xl bg-gradient-to-br ${member.gradient} flex items-center justify-center text-6xl sm:text-7xl md:text-8xl xl:text-9xl shadow-2xl`}
-                  style={{ boxShadow: `0 0 60px ${member.color}40` }}
-                >
-                  {member.emoji}
-                </div>
+                {member.imageUrl ? (
+                  <a
+                    href={member.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`relative block w-48 h-48 sm:w-60 sm:h-60 md:w-64 md:h-64 xl:w-72 xl:h-72 rounded-3xl bg-gradient-to-br ${member.gradient} overflow-hidden shadow-2xl`}
+                    style={{ boxShadow: `0 0 60px ${member.color}40` }}
+                  >
+                    <span className="absolute inset-0 flex items-center justify-center text-6xl sm:text-7xl md:text-8xl xl:text-9xl">
+                      {member.emoji}
+                    </span>
+                    <FallbackImage
+                      src={member.imageUrl}
+                      alt={member.nameKr}
+                      sizes="(max-width: 640px) 192px, (max-width: 768px) 240px, (max-width: 1280px) 256px, 288px"
+                      className="rounded-3xl"
+                    />
+                  </a>
+                ) : (
+                  <div
+                    className={`w-48 h-48 sm:w-60 sm:h-60 md:w-64 md:h-64 xl:w-72 xl:h-72 rounded-3xl bg-gradient-to-br ${member.gradient} flex items-center justify-center text-6xl sm:text-7xl md:text-8xl xl:text-9xl shadow-2xl`}
+                    style={{ boxShadow: `0 0 60px ${member.color}40` }}
+                  >
+                    {member.emoji}
+                  </div>
+                )}
               </div>
 
               {/* Info card */}

@@ -10,6 +10,10 @@ export type Member = {
   emoji: string;
   bio: string;
   facts: string[];
+  /** 공식 프로필 사진 URL — 설정 시 FallbackImage로 표시, 미설정 시 emoji gradient 표시 */
+  imageUrl?: string;
+  /** imageUrl 클릭 시 이동할 출처 URL */
+  sourceUrl?: string;
 };
 
 export type Album = {
@@ -267,6 +271,17 @@ export const news: NewsItem[] = [
     source: "Forbes, 공식 채널",
   },
 ];
+
+/** YouTube URL에서 video ID를 추출합니다 */
+export function getYouTubeVideoId(url: string): string | null {
+  const match = url.match(/[?&]v=([^&]+)/);
+  return match?.[1] ?? null;
+}
+
+/** YouTube video ID로 고화질 썸네일 URL을 반환합니다 */
+export function getYouTubeThumbnail(videoId: string): string {
+  return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+}
 
 export const schedule: ScheduleItem[] = [
   {

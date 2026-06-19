@@ -1,5 +1,6 @@
-import { albums } from "@/lib/data";
-import { Music, ExternalLink } from "lucide-react";
+import { albums, getYouTubeVideoId, getYouTubeThumbnail } from "@/lib/data";
+import { Music, ExternalLink, Play } from "lucide-react";
+import FallbackImage from "@/components/FallbackImage";
 
 export const metadata = {
   title: "음악 | RESCENE 팬페이지",
@@ -36,16 +37,49 @@ export default function MusicPage() {
         <div className="mb-24 lg:mb-32">
           <h2 className="text-lg sm:text-xl font-bold text-white mb-7 sm:mb-9">앨범</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 lg:gap-8">
-            {[...albums].reverse().map((album) => (
+            {[...albums].reverse().map((album) => {
+              const videoId = album.mvLink ? getYouTubeVideoId(album.mvLink) : null;
+              const thumbUrl = videoId ? getYouTubeThumbnail(videoId) : null;
+
+              const CoverWrapper = album.mvLink
+                ? ({ children }: { children: React.ReactNode }) => (
+                    <a
+                      href={album.mvLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`relative block h-44 sm:h-52 bg-gradient-to-br ${album.color} flex items-center justify-center flex-shrink-0 overflow-hidden group/cover`}
+                    >
+                      {children}
+                    </a>
+                  )
+                : ({ children }: { children: React.ReactNode }) => (
+                    <div className={`relative h-44 sm:h-52 bg-gradient-to-br ${album.color} flex items-center justify-center flex-shrink-0`}>
+                      {children}
+                    </div>
+                  );
+
+              return (
               <div key={album.id} className="glass-card rounded-3xl overflow-hidden hover:border-purple-500/40 transition-all group flex flex-col">
                 {/* Album cover */}
-                <div className={`relative h-44 sm:h-52 bg-gradient-to-br ${album.color} flex items-center justify-center flex-shrink-0`}>
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="relative text-center">
-                    <Music size={40} className="text-white/60 mx-auto mb-2" />
+                <CoverWrapper>
+                  {thumbUrl && (
+                    <FallbackImage
+                      src={thumbUrl}
+                      alt={`${album.title} MV 썸네일`}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="group-hover/cover:scale-105 transition-transform duration-500"
+                    />
+                  )}
+                  <div className={`absolute inset-0 transition-all ${thumbUrl ? "bg-black/50 group-hover/cover:bg-black/30" : "bg-black/20"}`} />
+                  <div className="relative z-10 text-center">
+                    {album.mvLink ? (
+                      <Play size={40} className="text-white/80 mx-auto mb-2 group-hover/cover:scale-110 transition-transform" />
+                    ) : (
+                      <Music size={40} className="text-white/60 mx-auto mb-2" />
+                    )}
                     <p className="text-white/70 text-xs font-medium">{album.releaseDate}</p>
                   </div>
-                </div>
+                </CoverWrapper>
 
                 {/* Info */}
                 <div className="p-6 sm:p-7 flex flex-col flex-1">
@@ -86,12 +120,13 @@ export default function MusicPage() {
                       className="mt-5 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors text-sm text-gray-300 hover:text-white border border-white/5 hover:border-white/20"
                     >
                       <ExternalLink size={14} />
-                      MV 보러가기
+                      YouTube에서 보기
                     </a>
                   )}
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
