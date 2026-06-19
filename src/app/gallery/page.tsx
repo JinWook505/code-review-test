@@ -119,7 +119,7 @@ export default function GalleryPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     <span className={`${isLarge ? "text-5xl sm:text-6xl" : "text-3xl sm:text-4xl"}`}>{member?.emoji}</span>
 
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-end p-4">
+                    <div className="absolute inset-0 bg-black/40 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity flex flex-col items-center justify-end p-4">
                       <p className="text-white font-bold text-sm">{member?.nameKr}</p>
                       <p className="text-white/60 text-xs mt-0.5">{item.era}</p>
                     </div>

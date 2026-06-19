@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { members } from "@/lib/data";
 import { ChevronRight, RotateCcw } from "lucide-react";
@@ -64,15 +64,12 @@ export default function MemberTestPage() {
   const [current, setCurrent] = useState(0);
   const [scores, setScores] = useState<Partial<Record<MemberId, number>>>({});
   const [finished, setFinished] = useState(false);
-  const [locked, setLocked] = useState(false);
-
-  useEffect(() => {
-    setLocked(false);
-  }, [current]);
+  const [answeredAt, setAnsweredAt] = useState<number | null>(null);
+  const isLocked = answeredAt === current;
 
   const handleSelect = (memberId: MemberId) => {
-    if (locked || finished) return;
-    setLocked(true);
+    if (isLocked || finished) return;
+    setAnsweredAt(current);
     const newScores = { ...scores, [memberId]: (scores[memberId] ?? 0) + 1 };
     setScores(newScores);
 
@@ -93,7 +90,7 @@ export default function MemberTestPage() {
     setCurrent(0);
     setScores({});
     setFinished(false);
-    setLocked(false);
+    setAnsweredAt(null);
   };
 
   if (finished) {
@@ -182,7 +179,7 @@ export default function MemberTestPage() {
               <button
                 key={idx}
                 onClick={() => handleSelect(opt.memberId)}
-                disabled={locked}
+                disabled={isLocked}
                 className="w-full text-left px-5 py-4 rounded-xl border border-transparent glass-card text-gray-300 hover:border-purple-500/40 hover:text-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span className="text-sm font-medium">{opt.label}</span>
