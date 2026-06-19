@@ -12,6 +12,7 @@ const navLinks = [
   { href: "/gallery", label: "갤러리" },
   { href: "/schedule", label: "일정" },
   { href: "/community", label: "커뮤니티" },
+  { href: "/fan", label: "팬존" },
 ];
 
 export default function Navbar() {
